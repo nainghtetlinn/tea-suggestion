@@ -6,5 +6,5 @@ export async function chatHandler(req: Request, res: Response) {
 
   if (!recipe) throw new Error("Something went wrong");
 
-  return res.json({ recipe });
+  return res.status(201).json({ recipe });
 }
