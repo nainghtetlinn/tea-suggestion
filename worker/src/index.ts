@@ -7,20 +7,25 @@ import { generateTeaRecipe } from "./services/ai";
 
 type Bindings = {
   OPENROUTER_API_KEY: string;
+  OPENROUTER_MODEL: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
 
 app.post("/chat", zValidator("json", ChatRequestSchema), async (c) => {
-  const { OPENROUTER_API_KEY } = c.env;
-  if (!OPENROUTER_API_KEY) {
+  const { OPENROUTER_API_KEY, OPENROUTER_MODEL } = c.env;
+  if (!OPENROUTER_API_KEY || !OPENROUTER_MODEL) {
     throw new HTTPException(500, {
       message: "OPENROUTER_API_KEY is not configured",
     });
   }
 
   const { preferences } = c.req.valid("json");
-  const recipe = await generateTeaRecipe(OPENROUTER_API_KEY, preferences);
+  const recipe = await generateTeaRecipe(
+    OPENROUTER_API_KEY,
+    OPENROUTER_MODEL,
+    preferences,
+  );
 
   return c.json({ recipe }, 201);
 });

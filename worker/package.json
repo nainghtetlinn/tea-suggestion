@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.5",
+    "@langchain/cloudflare": "^1.1.0",
     "@langchain/core": "^1.1.48",
     "@langchain/openrouter": "^0.3.0",
     "hono": "^4.10.3",

@@ -45,10 +45,11 @@ Return ONLY JSON:
 
 export async function generateTeaRecipe(
   apiKey: string,
+  apiModel: string,
   preferences: string,
 ): Promise<TeaRecipe> {
   const model = new ChatOpenRouter({
-    model: "openai/gpt-oss-120b:free",
+    model: apiModel,
     apiKey,
     temperature: 0.8,
   });
